@@ -7,6 +7,6 @@
 <p>password: secret</p>
 <button routerLink="/">Home</button>
 <button routerLink="/todo/add">Add Todo</button>
-<button *ngIf="!loggedIn" routerLink="/login">Login</button>
-<button *ngIf="loggedIn" routerLink="/logout">Logout</button>
+<button *ngIf="!loginStatus" routerLink="/login">Login</button>
+<button *ngIf="loginStatus" routerLink="/logout">Logout</button>
 <router-outlet></router-outlet>

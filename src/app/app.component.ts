@@ -6,12 +6,11 @@ import { AuthService } from './auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'To Do List';
-  loggedIn: boolean;
-  constructor(private auth: AuthService) { }
-
-  ngAfterViewChecked() {
-    this.loggedIn = this.auth.getloggedInStatus()
+  loginStatus: boolean;
+  constructor(private auth: AuthService) {
+    this.auth.getLoginStatus().subscribe( val => this.loginStatus = val);
   }
 }

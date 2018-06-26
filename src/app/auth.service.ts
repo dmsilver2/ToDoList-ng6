@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import{ BehaviorSubject } from 'rxjs';
 
 
 interface myData {
@@ -12,7 +13,7 @@ interface myData {
 })
 export class AuthService {
 
-  loggedInStatus = false;
+  private loginStatus =  new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) { }
 
@@ -25,12 +26,12 @@ export class AuthService {
     });
   }
 
-  setLoggedIn(value: boolean) {
-    this.loggedInStatus = value;
+  setLoginStatus(value: boolean) {
+    this.loginStatus.next(value);
   }
 
-  getloggedInStatus() {
-    return this.loggedInStatus;
+  getLoginStatus() {
+    return this.loginStatus.asObservable();
   }
 
 }

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     return this.auth.userDetails(username, password).subscribe(
       res => {
         if(res.success) {
-          this.auth.setLoggedIn(true);
+          this.auth.setLoginStatus(true);
           this.router.navigate(['/'])
         }
         else {
