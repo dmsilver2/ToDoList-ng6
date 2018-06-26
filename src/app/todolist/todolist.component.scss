@@ -1,0 +1,19 @@
+.todolist-container {
+  table {
+    margin: 0 auto 0 auto;
+    border-spacing: 0px;
+    tbody {
+      tr {
+        td, th {
+          border-style: solid;
+        }
+      }
+      tr.even {
+        background-color: #61bbfb;
+      }
+      tr.odd {
+        background-color: #e6dcdc;
+      }
+    }
+  }
+}

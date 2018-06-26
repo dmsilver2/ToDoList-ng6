@@ -1,0 +1,14 @@
+<div>
+  <form>
+    <div class="form-group">
+      <label for="todo">To Do:</label>
+      <input required [(ngModel)]="todo.todo" name="todo" type="text" />
+      <div class="alert alert-danger" *ngIf="todo.todo.touched && !todo.todo.valid">To Do is Required</div>
+    </div>
+    <div class="form-group">
+      <label for="todo">Due Date:</label>
+      <input required [(ngModel)]="todo.due" id="due" name="due" type="date" min="today"/>
+    </div>
+    <button (click)="add()">Add</button>
+  </form>
+</div>

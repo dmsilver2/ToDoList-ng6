@@ -1,0 +1,21 @@
+<div class="todolist-container">
+  <table>
+    <tr class="odd">
+      <th>To Do</th>
+      <th>Creation Date</th>
+      <th>Modified Date</th>
+      <th>Due Date</th>
+      <th>Completed?</th>
+    </tr>
+
+    <ng-container *ngIf="toDoList?.length > 0">
+      <tr *ngFor="let todo of toDoList; let evenData = even; let oddData= odd;" [ngClass]="{odd: oddData, even: evenData}">
+        <td>{{todo.todo}}</td>
+        <td>{{todo._id | slice:0:10}}</td>
+        <td>{{todo.modified}}</td>
+        <td>{{todo.due}}</td>
+        <td>{{todo.completed}}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
