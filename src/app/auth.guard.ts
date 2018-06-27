@@ -18,11 +18,11 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      this.auth.getLoginStatus().pipe(map( status => {
+      this.auth.getLoginStatus().subscribe( status => {
         if(status) {
           return true;
         }
-      }));
+      });
       return this.user.isLoggedIn().pipe(map( res => {
         if(res.status){
           this.auth.setLoginStatus(true);
@@ -32,6 +32,5 @@ export class AuthGuard implements CanActivate {
           return false;
         }
       }));
-
-  }
+    }
 }

@@ -39,10 +39,15 @@ const authMiddleware = (req, res, next) => {
   }
 }
 
-app.route('/api/ToDoList').get((req, res) => {
+app.get('/api/ToDoList',(req, res) => {
   db.collection('todolist').find().toArray(function(err, data) {
-    if(err) return console.log(err);
-    res.send(JSON.stringify(data));
+    if(err) {
+      res.status(403).send({
+        errorMessage: err
+      });
+    } else {
+      res.status(200).send(data);
+    }
   });
 });
 
@@ -51,15 +56,15 @@ app.post('/api/login', validatePayloadMiddleware, (req, res) => {
   const password = req.body.password;
   if(appUser.name == username && appUser.pw == password) {
     req.session.user = 'admin';
-    res.send(JSON.stringify({
+    res.status(200).send({
       success: true,
       message: 'success'
-    }));
+    });
   } else {
-    res.send(JSON.stringify({
+    res.status(403).send({
       success: false,
       message: 'Invalid name or password'
-    }));
+    });
   }
 });
 
@@ -98,15 +103,17 @@ app.post('/api/ToDo/:id/delete', authMiddleware, (req, res) => {
 app.post('/api/ToDo/Add', authMiddleware, (req, res) => {
   let todo = req.body;
   db.collection('todolist').insertOne(req.body, (err, result) => {
-    if (err) return res.send(JSON.stringify({
-      success: false,
-      message: err
-      }));
-
-    res.send(JSON.stringify({
-      success: true,
-      message: 'success'
-      }));
+    if (err) {
+      return res.status(500).send({
+        success: false,
+        message: err
+      });
+    } else {
+      res.status(200).send({
+        success: true,
+        message: 'success'
+      });
+    }
   })
 });
 

@@ -13,7 +13,7 @@ interface myData {
 })
 export class AuthService {
 
-  private loginStatus =  new BehaviorSubject<boolean>(true);
+  private loginStatus =  new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 
